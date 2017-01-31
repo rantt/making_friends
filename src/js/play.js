@@ -12,12 +12,17 @@
 
 // var musicOn = true;
 
-
 var wKey;
 var aKey;
 var sKey;
 var dKey;
+var leftArrow;
+var rightArrow;
+var upArrow;
+var downArrow;
 var score = 0;
+
+
 
 Game.Play = function(game) {
   this.game = game;
@@ -26,6 +31,25 @@ Game.Play = function(game) {
 Game.Play.prototype = {
   create: function() {
     this.game.world.setBounds(0, 0 ,Game.w ,Game.h);
+
+
+    this.map = this.game.add.tilemap('test2');
+    this.map.addTilesetImage('tiles2');
+
+    this.layer1 = this.map.createLayer('layer1');
+    this.layer2 = this.map.createLayer('layer2');
+
+    // this.map.setCollision([1,7,8,9,10,11]);
+    // this.map.setCollision([1,7,8,9,10,11,14,15,16,17],true,'layer2');
+
+    this.layer1.resizeWorld();
+    this.layer2.resizeWorld();
+
+    var tile1 = this.map.getTile(0,0,'layer1');
+    console.log('tile' + tile1);
+    
+
+    this.player = new Player(this.game, 5, 4, this.map);
 
     // // Music
     // this.music = this.game.add.sound('music');

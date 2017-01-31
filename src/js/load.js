@@ -1,7 +1,19 @@
+var tileSize = 64;
+var dRows = 10;
+var dCols = 12;
+var dialogue;
+var spaceKey;
+
 var Game = {
-  w: 800,
-  h: 600
+  w: tileSize*dCols,
+  h: tileSize*dRows,
+  camera: {x:0, y:0}
 };
+
+// var Game = {
+//   w: 800,
+//   h: 600
+// };
 
 // var w = 800;
 // var h = 600;
@@ -19,11 +31,15 @@ Game.Boot.prototype = {
 		this.game.load.image('instructions', 'assets/images/instructions.png');
     this.game.load.bitmapFont('minecraftia', 'assets/fonts/font.png', 'assets/fonts/font.xml'); //load default font
 
+    this.game.load.spritesheet('player','assets/images/hero_x64.png',64,64,12);
+    this.game.load.spritesheet('tiles2','assets/images/tiles2.png',tileSize,tileSize,19);
+    this.game.load.tilemap('test', 'assets/atlas/test.json',null,Phaser.Tilemap.TILED_JSON);
+    this.game.load.tilemap('test2', 'assets/atlas/test2.json',null,Phaser.Tilemap.TILED_JSON);
 
-    // //Scale Image to Fit Window
-    // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    // this.game.scale.maxHeight = window.innerHeight;
-    // this.game.scale.maxWidth = window.innerHeight*(Game.w/Game.h);
+    //Scale Image to Fit Window
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.maxHeight = window.innerHeight;
+    this.game.scale.maxWidth = window.innerHeight*(Game.w/Game.h);
 
   },
   create: function() {
