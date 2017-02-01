@@ -3,16 +3,16 @@ var Player = function(game, tilex, tiley, map) {
 
   Phaser.Sprite.call(this, game, tilex*tileSize, tiley*tileSize, 'player');
 
-  this.level = 1;
-  this.health = this.maxHealth();
-  this.hearts = 0;
-  this.potion = 3;
-  this.inCombat = false;
-  this.isMoving = false;
-  this.nextLevel = 80;
-  this.exp = 0;
-  this.levelupSnd = this.game.add.sound('levelup');
-  this.levelupSnd.volume = 0.2;
+  // this.level = 1;
+  // this.health = this.maxHealth();
+  // this.hearts = 0;
+  // this.potion = 3;
+  // this.inCombat = false;
+  // this.isMoving = false;
+  // this.nextLevel = 80;
+  // this.exp = 0;
+  // this.levelupSnd = this.game.add.sound('levelup');
+  // this.levelupSnd.volume = 0.2;
 
   this.map = map;
   this.marker = new Phaser.Point(tilex,tiley);
@@ -40,88 +40,88 @@ var Player = function(game, tilex, tiley, map) {
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
-Player.prototype.reset = function(tilex,tiley) {
-
-  Phaser.Sprite.call(this, game, tilex*tileSize, tiley*tileSize, 'player');
-  // this.level = 1;
-  this.health = this.maxHealth();
-  this.potion = 0;
-  this.inCombat = false;
-  this.isMoving = false;
-
-  this.marker = new Phaser.Point(tilex,tiley);
-
-  this.game.physics.arcade.enable(this); // set up player physics
-  this.body.fixedRotation = true; // no rotation
-  this.body.moves = false;
-
-  this.game.add.existing(this);
-
-  this.direction = 'down';
-  this.animations.add('down', [6, 7], 6, true);
-  this.animations.add('up', [8, 9], 6, true);
-  this.animations.add('right', [4, 11], 6, true);
-  this.animations.add('left', [5, 10], 6, true);
-
-};
-Player.prototype.loadStats = function() {
-  ////// STATS BOX //////
-  this.stats_box = new Panel(this.game, 50, 100, 3, 4, 64, 'box');
-
-  this.level_text = this.game.add.bitmapText(40, 100, 'minecraftia', 'Level: '+this.level, 20); 
-  this.level_text.fixedToCamera = true;
-  this.stats_box.add(this.level_text);
-
-  this.health_text = this.game.add.bitmapText(40, 136, 'minecraftia', 'Health: '+this.health, 20); 
-  this.health_text.fixedToCamera = true;
-  this.stats_box.add(this.health_text);
-
-  this.potion_text = this.game.add.bitmapText(40, 172, 'minecraftia', 'Potions: '+this.potion, 20); 
-  this.potion_text.fixedToCamera = true;
-  this.stats_box.add(this.potion_text);
-
-  this.heart_text = this.game.add.bitmapText(40, 208, 'minecraftia', 'Heart:'+this.hearts+'/3', 20); 
-  this.heart_text.fixedToCamera = true;
-
-  this.stats_box.add(this.heart_text);
-
-  this.exp_text = this.game.add.bitmapText(40, 246, 'minecraftia', 'Exp:'+this.exp+'/'+this.nextLevel, 20); 
-  this.exp_text.fixedToCamera = true;
-
-  this.stats_box.add(this.exp_text);
-
-};
-Player.prototype.refreshStats = function() {
-  this.level_text.setText('Level: '+this.level);
-  this.health_text.setText('Health: '+this.health);
-  this.potion_text.setText('Potions: '+this.potion);
-  this.heart_text.setText('Heart:'+this.hearts+'/3');
-  this.exp_text.setText('Exp:\n'+this.exp+'/'+this.nextLevel);
-};
-Player.prototype.maxHealth = function() {
-  return 8 + this.level * 2;
-};
-Player.prototype.addExp = function(exp) {
-  this.exp += exp;
-  if (this.exp >= this.nextLevel) {
-    this.levelupSnd.play();
-    this.exp = this.exp - this.nextLevel;
-    this.level++;
-    this.nextLevel = this.nextLevel + (this.level-1)*20; 
-  }
-};
-Player.prototype.takePotion = function() {
-  if (this.potion <= 0) {return;}
-  var hp = Math.ceil(this.maxHealth()/3);
-
-  this.potion--;
-  if (this.health + hp > this.maxHealth()) {
-    this.health = this.maxHealth();
-  }else {
-    this.health += hp;
-  }
-  return this.health;
-};
+// Player.prototype.reset = function(tilex,tiley) {
+//
+//   Phaser.Sprite.call(this, game, tilex*tileSize, tiley*tileSize, 'player');
+//   // this.level = 1;
+//   this.health = this.maxHealth();
+//   this.potion = 0;
+//   this.inCombat = false;
+//   this.isMoving = false;
+//
+//   this.marker = new Phaser.Point(tilex,tiley);
+//
+//   this.game.physics.arcade.enable(this); // set up player physics
+//   this.body.fixedRotation = true; // no rotation
+//   this.body.moves = false;
+//
+//   this.game.add.existing(this);
+//
+//   this.direction = 'down';
+//   this.animations.add('down', [6, 7], 6, true);
+//   this.animations.add('up', [8, 9], 6, true);
+//   this.animations.add('right', [4, 11], 6, true);
+//   this.animations.add('left', [5, 10], 6, true);
+//
+// };
+// Player.prototype.loadStats = function() {
+//   ////// STATS BOX //////
+//   this.stats_box = new Panel(this.game, 50, 100, 3, 4, 64, 'box');
+//
+//   this.level_text = this.game.add.bitmapText(40, 100, 'minecraftia', 'Level: '+this.level, 20); 
+//   this.level_text.fixedToCamera = true;
+//   this.stats_box.add(this.level_text);
+//
+//   this.health_text = this.game.add.bitmapText(40, 136, 'minecraftia', 'Health: '+this.health, 20); 
+//   this.health_text.fixedToCamera = true;
+//   this.stats_box.add(this.health_text);
+//
+//   this.potion_text = this.game.add.bitmapText(40, 172, 'minecraftia', 'Potions: '+this.potion, 20); 
+//   this.potion_text.fixedToCamera = true;
+//   this.stats_box.add(this.potion_text);
+//
+//   this.heart_text = this.game.add.bitmapText(40, 208, 'minecraftia', 'Heart:'+this.hearts+'/3', 20); 
+//   this.heart_text.fixedToCamera = true;
+//
+//   this.stats_box.add(this.heart_text);
+//
+//   this.exp_text = this.game.add.bitmapText(40, 246, 'minecraftia', 'Exp:'+this.exp+'/'+this.nextLevel, 20); 
+//   this.exp_text.fixedToCamera = true;
+//
+//   this.stats_box.add(this.exp_text);
+//
+// };
+// Player.prototype.refreshStats = function() {
+//   this.level_text.setText('Level: '+this.level);
+//   this.health_text.setText('Health: '+this.health);
+//   this.potion_text.setText('Potions: '+this.potion);
+//   this.heart_text.setText('Heart:'+this.hearts+'/3');
+//   this.exp_text.setText('Exp:\n'+this.exp+'/'+this.nextLevel);
+// };
+// Player.prototype.maxHealth = function() {
+//   return 8 + this.level * 2;
+// };
+// Player.prototype.addExp = function(exp) {
+//   this.exp += exp;
+//   if (this.exp >= this.nextLevel) {
+//     this.levelupSnd.play();
+//     this.exp = this.exp - this.nextLevel;
+//     this.level++;
+//     this.nextLevel = this.nextLevel + (this.level-1)*20; 
+//   }
+// };
+// Player.prototype.takePotion = function() {
+//   if (this.potion <= 0) {return;}
+//   var hp = Math.ceil(this.maxHealth()/3);
+//
+//   this.potion--;
+//   if (this.health + hp > this.maxHealth()) {
+//     this.health = this.maxHealth();
+//   }else {
+//     this.health += hp;
+//   }
+//   return this.health;
+// };
 Player.prototype.update = function() {
   // Show Stats Menu when player is standing still
   if (this.isMoving) {
@@ -196,8 +196,6 @@ Player.prototype.cantMove = function(x,y) {
   var newy = this.marker.y + y;
 
   var tile1 = this.map.getTile(newx, newy, 'layer1'); 
-  console.log('tile1'+tile1);
-
 
   //Block Moving onto a non-existent tile
   if (tile1 === null) {

@@ -31,11 +31,6 @@ Game.Boot.prototype = {
 		this.game.load.image('instructions', 'assets/images/instructions.png');
     this.game.load.bitmapFont('minecraftia', 'assets/fonts/font.png', 'assets/fonts/font.xml'); //load default font
 
-    this.game.load.spritesheet('player','assets/images/hero_x64.png',64,64,12);
-    this.game.load.spritesheet('tiles2','assets/images/tiles2.png',tileSize,tileSize,19);
-    this.game.load.tilemap('test', 'assets/atlas/test.json',null,Phaser.Tilemap.TILED_JSON);
-    this.game.load.tilemap('test2', 'assets/atlas/test2.json',null,Phaser.Tilemap.TILED_JSON);
-
     //Scale Image to Fit Window
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.game.scale.maxHeight = window.innerHeight;
@@ -61,6 +56,14 @@ Game.Load.prototype = {
     var loadingText = this.game.add.bitmapText(Game.w/2, Game.h/2, 'minecraftia', 'Loading...', 30).anchor.setTo(0.5);
   	var preloading = this.game.add.sprite(Game.w/2-64, Game.h/2+50, 'loading');
   	this.game.load.setPreloadSprite(preloading);
+
+    this.game.load.spritesheet('player','assets/images/hero_x64.png',64,64,12);
+
+    this.game.load.spritesheet('tiles','assets/images/tiles2.png',tileSize,tileSize,19);
+    this.game.load.tilemap('test', 'assets/atlas/test.json',null,Phaser.Tilemap.TILED_JSON);
+    this.game.load.tilemap('test2', 'assets/atlas/test2.json',null,Phaser.Tilemap.TILED_JSON);
+
+
 
     //Load button for twitter
     this.game.load.image('twitter','assets/images/twitter.png');
